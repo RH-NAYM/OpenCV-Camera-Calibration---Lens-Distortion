@@ -1,6 +1,6 @@
 # 💡 Camera Calibration & Lens Distortion Correction in OpenCV (Python Tutorial)
 ---
-[![dev branch](https://img.shields.io/badge/branch-dev-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Camera-Calibration---Lens-Distortion/tree/dev)
+[![main branch](https://img.shields.io/badge/branch-main-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Camera-Calibration---Lens-Distortion/tree/main)
 #
 
 <p align="center">
