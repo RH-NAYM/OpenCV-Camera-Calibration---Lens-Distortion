@@ -106,7 +106,7 @@ class LearnTools:
         ax.axis("off")
 
 
-    def show_multiple_images(self, image_plotting_data=[]):
+    def show_multiple_images(self, image_plotting_data=None, images_per_row=3):
         """
         Display multiple images dynamically from a list of dictionaries.
 
@@ -115,24 +115,39 @@ class LearnTools:
                 - 'image': the image array
                 - 'title': title for the image
                 - 'cmap': optional colormap (can be None)
+            images_per_row (int): Number of images per row
         """
         if not image_plotting_data:
-            return  # Nothing to show
+            return
 
         n = len(image_plotting_data)
+        cols = min(images_per_row, n)
+        rows = math.ceil(n / cols)
 
-        # Automatically determine figure size
-        fig, axs = plt.subplots(1, n, figsize=(10*n, 10))
+        fig, axs = plt.subplots(
+            rows,
+            cols,
+            figsize=(5 * cols, 5 * rows)
+        )
 
-        # Handle single image case
-        if n == 1:
+        # Normalize axs to 1D list
+        if rows == 1 and cols == 1:
             axs = [axs]
+        else:
+            axs = axs.flatten()
 
         for i, data in enumerate(image_plotting_data):
             img = data.get("image")
-            title = data.get("title", f"Image {i+1}")
-            cmap = data.get("cmap", None)
+            title = data.get("title", f"Image {i + 1}")
+            cmap = data.get("cmap")
+
             if img is not None:
                 self.show_image(axs[i], img, title=title, cmap=cmap)
 
+        # Hide unused axes
+        for j in range(i + 1, len(axs)):
+            axs[j].axis("off")
+
+        plt.tight_layout()
         plt.show()
+
